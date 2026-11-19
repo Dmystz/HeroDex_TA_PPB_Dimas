@@ -1,0 +1,11 @@
+{
+  "heroes": [
+    { "id": 1, "name": "Jett", "game": "Valorant", "role": "Duelist", "image": "", "description": "Agile duelist from South Korea." },
+    { "id": 2, "name": "Sage", "game": "Valorant", "role": "Sentinel", "image": "", "description": "Healer who can revive allies." },
+    { "id": 3, "name": "Link", "game": "The Legend of Zelda", "role": "Swordsman", "image": "", "description": "Hero of Hyrule." }
+  ],
+  "games": [
+    { "id": 1, "title": "Valorant", "genre": "Tactical FPS", "image": "", "description": "5v5 character-based shooter." },
+    { "id": 2, "title": "The Legend of Zelda", "genre": "Action Adventure", "image": "", "description": "Quest to save Hyrule." }
+  ]
+}
