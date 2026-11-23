@@ -58,7 +58,7 @@ export default function About() {
       <ProfileCard />
       <div className="card">
         <h2>HeroDex</h2>
-        <p>Ensiklopedia karakter game berbasis Progressive Web App dengan data dari REST API sendiri.</p>
+        <p>Ensiklopedia karakter game untuk melihat hero, game, dan menyimpan favoritmu.</p>
       </div>
       <div className="card">
         <h2>Install Aplikasi</h2>
@@ -76,10 +76,6 @@ export default function About() {
             )}
           </>
         )}
-      </div>
-      <div className="card">
-        <h2>Tech Stack</h2>
-        <p>React (JSX), Vite, React Router, vite-plugin-pwa</p>
       </div>
     </>
   )
