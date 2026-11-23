@@ -21,8 +21,7 @@ function ProfileCard() {
         <div className="avatar" aria-hidden="true">{profile.name[0]?.toUpperCase()}</div>
         <div className="profile-info">
           <h2>{profile.name}</h2>
-          <p className="muted">NIM: {profile.nim || '-'}</p>
-          <p className="muted">Kelas: {profile.kelas || '-'}</p>
+          <p className="muted">Favorite game: {profile.game || '-'}</p>
         </div>
         <button className="btn btn-sm btn-ghost" onClick={startEdit}>Edit</button>
       </div>
@@ -32,14 +31,11 @@ function ProfileCard() {
   return (
     <form className="card" onSubmit={onSubmit}>
       <h2>Edit profil</h2>
-      <label className="field">Nama
+      <label className="field">Nickname
         <input className="search" value={draft.name} onChange={set('name')} maxLength={40} required autoFocus />
       </label>
-      <label className="field">NIM
-        <input className="search" value={draft.nim} onChange={set('nim')} maxLength={20} inputMode="numeric" />
-      </label>
-      <label className="field">Kelas
-        <input className="search" value={draft.kelas} onChange={set('kelas')} maxLength={20} />
+      <label className="field">Favorite game
+        <input className="search" value={draft.game} onChange={set('game')} maxLength={40} />
       </label>
       <div className="form-actions">
         <button type="button" className="btn btn-ghost" onClick={() => setEditing(false)}>Batal</button>

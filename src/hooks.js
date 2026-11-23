@@ -39,7 +39,7 @@ export function useTitle(title) {
 }
 
 const PROFILE_KEY = 'profile'
-const DEFAULT_PROFILE = { name: 'Dimas', nim: '', kelas: '' }
+const DEFAULT_PROFILE = { name: 'Dimas', game: '' }
 
 const readProfile = () => {
   try {
@@ -55,8 +55,7 @@ export function useProfile() {
   const save = useCallback((next) => {
     const clean = {
       name: next.name.trim().slice(0, 40) || DEFAULT_PROFILE.name,
-      nim: next.nim.trim().slice(0, 20),
-      kelas: next.kelas.trim().slice(0, 20)
+      game: next.game.trim().slice(0, 40)
     }
     try { localStorage.setItem(PROFILE_KEY, JSON.stringify(clean)) } catch { /* diabaikan */ }
     setProfile(clean)
