@@ -1,31 +1,24 @@
 import { useCallback, useEffect, useState } from 'react'
 
-const BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
-const KEY = import.meta.env.VITE_SUPABASE_KEY
+// Base URL API buatan sendiri (Express), mis. http://localhost:3001/api
+const BASE = (import.meta.env.VITE_API_URL || '/api').replace(/\/+$/, '')
 const TTL = 60_000
 const cache = new Map()
 
 const toMessage = (err) => {
   if (err.name === 'TypeError') return 'Tidak ada koneksi internet.'
-  if (err.status === 406 || err.status === 404) return 'Data tidak ditemukan.'
+  if (err.status === 404) return 'Data tidak ditemukan.'
   if (err.status >= 500) return 'Server sedang bermasalah. Coba lagi nanti.'
   return 'Data gagal dimuat.'
 }
 
-async function get(path, { single = false, signal } = {}) {
+async function get(path, { signal } = {}) {
   const hit = cache.get(path)
   if (hit && Date.now() - hit.t < TTL) return hit.data
 
   let res
   try {
-    res = await fetch(`${BASE}${path}`, {
-      signal,
-      headers: {
-        apikey: KEY,
-        Authorization: `Bearer ${KEY}`,
-        ...(single && { Accept: 'application/vnd.pgrst.object+json' })
-      }
-    })
+    res = await fetch(`${BASE}${path}`, { signal })
   } catch (err) {
     if (err.name === 'AbortError') throw err
     const e = new Error(toMessage(err))
@@ -42,10 +35,10 @@ async function get(path, { single = false, signal } = {}) {
   return data
 }
 
-export const getHeroes = (signal) => get('/heroes_view?select=*&order=id', { signal })
-export const getHero = (id, signal) => get(`/heroes_view?id=eq.${encodeURIComponent(id)}`, { single: true, signal })
-export const getGames = (signal) => get('/games?select=*&order=id', { signal })
-export const getGame = (id, signal) => get(`/games?id=eq.${encodeURIComponent(id)}`, { single: true, signal })
+export const getHeroes = (signal) => get('/heroes', { signal })
+export const getHero = (id, signal) => get(`/heroes/${encodeURIComponent(id)}`, { signal })
+export const getGames = (signal) => get('/games', { signal })
+export const getGame = (id, signal) => get(`/games/${encodeURIComponent(id)}`, { signal })
 
 /** fn menerima AbortSignal. `reload` mengulang request (tombol "Coba lagi"). */
 export function useFetch(fn, deps = []) {
