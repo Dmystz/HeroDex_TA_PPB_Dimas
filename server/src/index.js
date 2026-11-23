@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import heroRoutes from "./routes/heroRoutes.js";
 import gameRoutes from "./routes/gameRoutes.js";
+import { isSupabaseConfigured } from "./config/supabaseClient.js";
 
 dotenv.config();
 
@@ -15,7 +16,9 @@ const origins = (process.env.CORS_ORIGIN || "")
 app.use(cors({ origin: origins.length ? origins : true }));
 app.use(express.json());
 
-app.get("/", (req, res) => res.json({ name: "HeroDex API", status: "ok" }));
+app.get("/", (req, res) =>
+  res.json({ name: "HeroDex API", status: "ok", supabaseConfigured: isSupabaseConfigured })
+);
 app.use("/api/heroes", heroRoutes);
 app.use("/api/games", gameRoutes);
 
