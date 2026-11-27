@@ -8,7 +8,7 @@ import GameDetail from './pages/GameDetail.jsx'
 import Favorites from './pages/Favorites.jsx'
 import About from './pages/About.jsx'
 import { Empty } from './components.jsx'
-import { useFavorites, useTitle } from './hooks.js'
+import { useFavorites, useOnline, useTitle } from './hooks.js'
 import { HomeIcon, ShieldIcon, GamepadIcon, StarIcon, UserIcon } from './icons.jsx'
 
 const tabs = [
@@ -61,11 +61,22 @@ function Pages({ fav }) {
   )
 }
 
+function OfflineBar() {
+  const online = useOnline()
+  if (online) return null
+  return (
+    <div className="offline-bar" role="status">
+      Mode offline: menampilkan data tersimpan. Favorit tetap bisa diubah dan tetap tersimpan.
+    </div>
+  )
+}
+
 export default function App() {
   const fav = useFavorites()
 
   return (
     <HashRouter>
+      <OfflineBar />
       <Pages fav={fav} />
       <Nav className="bottom-nav" label="Navigasi utama" />
     </HashRouter>

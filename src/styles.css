@@ -137,3 +137,6 @@ p{margin:0 0 12px}
 .field .search{margin:6px 0 0}
 .form-actions{display:flex;gap:10px}
 .form-actions .btn{flex:1}
+/* ============ Banner offline ============ */
+.offline-bar{position:sticky;top:0;z-index:20;padding:8px max(16px,env(safe-area-inset-left));text-align:center;font-size:.82rem;font-weight:600;color:#fde68a;background:rgba(120,80,0,.85);border-bottom:1px solid rgba(253,230,138,.35)}
+@supports (backdrop-filter:blur(1px)){.offline-bar{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}}

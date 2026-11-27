@@ -2,6 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { registerSW } from 'virtual:pwa-register'
 import App from './App.jsx'
+import { syncOffline } from './api.js'
 import './styles.css'
 
 if ('serviceWorker' in navigator) {
@@ -27,5 +28,10 @@ if ('serviceWorker' in navigator) {
     })
   }
 }
+
+// Unduh data ke IndexedDB saat app dibuka dan setiap kali koneksi kembali,
+// supaya semua halaman tetap bisa dibuka saat offline.
+syncOffline()
+window.addEventListener('online', syncOffline)
 
 createRoot(document.getElementById('root')).render(<App />)
